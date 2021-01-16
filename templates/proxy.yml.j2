@@ -40,6 +40,10 @@ Parameters:
     Type: String
     Description: Comma separated list of domains to whitelist
     Default: ""
+  ProxyRegion:
+    Type: String
+    Description: Comma separate list of regions to whitelist
+    Default: "eu-west-1"
   ProxyNetworkMode:
     Type: String
     Description: Docker networking mode
@@ -347,6 +351,8 @@ Resources:
                   - 0
               Protocol: tcp
         Environment:
+        - Name: AWS_REGIONS
+          Value: { "Ref": "ProxyRegion"}
         - Name: NO_WHITELIST
           Value: { "Ref": "ProxyDisableWhitelist" }
         - Name: SQUID_WHITELIST
